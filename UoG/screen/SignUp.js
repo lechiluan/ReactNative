@@ -4,31 +4,35 @@ import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, ScrollView}
 import UserInput from "../Components/UserInput";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view' //ScrollView
 
-const LogIn = ({navigation}) => {
+
+const SignUp = ({navigation}) => {
     return(
         <KeyboardAwareScrollView contentContainerStyle={styles.container}>
-            <View style={styles.LogIn}>
+            <View style={styles.SignUp}>
                 <Image style={styles.image}source={require('../assets/Logo.png')} />
-                <Text style={styles.title}>Log In</Text>
+                <Text style={styles.title}>Sign Up</Text>
                 
+                <UserInput name="Full Name"/>        
                 <UserInput name="UserName"/>
-                <UserInput name="Password"/>        
-                
+                <UserInput name="Password"/> 
+                <UserInput name="Confirm Password"/>        
+                <UserInput name="Email"/>
+                <UserInput name="Phone Number"/>
+
                 <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonText}>Login</Text>
+                    <Text style={styles.buttonText}>Sign Up</Text>
                 </TouchableOpacity>
                             
-                <Text>
-                    Don't have an account? <Text onPress={() => navigation.navigate("SignUp")} style={{color:'blue'}}>Sign Up</Text>
+                <Text style={styles.login}>
+                    Do have an account? <Text onPress={() => navigation.navigate("LogIn")} style={{color:'blue'}}>Log In</Text> 
                 </Text>
-                <Text onPress={() => navigation.navigate("ForgotPassword")} style={{color: 'red'}}>Forgot Password</Text>
             </View>
         </KeyboardAwareScrollView>
     );
 };
 
 const styles = StyleSheet.create({
-    LogIn: {
+    SignUp: {
         // flex: 1,  
         justifyContent: 'center',
         alignItems: 'center',
@@ -37,7 +41,7 @@ const styles = StyleSheet.create({
     image: {
         width: 250,
         height: 150,
-        marginVertical: 30,  
+        marginVertical: 30,
     },
     title: {
         fontSize: 30,
@@ -45,23 +49,7 @@ const styles = StyleSheet.create({
         color: 'blue',
         marginBottom: 30,
     },
-    username: {
-        width: "100%",
-        marginTop: 20,
-        fontWeight: '500',
-    }, 
-    password: {
-        width: "100%",
-        marginTop: 20,
-        fontWeight: '500',
-    },
-    input: {
-        borderBottomColor: 'black',
-        borderBottomWidth: 0.5,
-        width: "100%",
-        height: 40,
-        marginBottom: 30,
-    },
+
     button: {
         backgroundColor: 'blue',
         width: "100%",
@@ -75,6 +63,9 @@ const styles = StyleSheet.create({
     buttonText: {
         color: 'white',
     },
+    login: {
+        marginBottom: 20,
+    }
 });
 
-export default LogIn;
+export default SignUp;

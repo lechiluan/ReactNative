@@ -4,31 +4,29 @@ import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, ScrollView}
 import UserInput from "../Components/UserInput";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view' //ScrollView
 
-const LogIn = ({navigation}) => {
+const ForgotPassword = ({navigation}) => {
     return(
         <KeyboardAwareScrollView contentContainerStyle={styles.container}>
-            <View style={styles.LogIn}>
+            <View style={styles.ForgotPassword}>
                 <Image style={styles.image}source={require('../assets/Logo.png')} />
-                <Text style={styles.title}>Log In</Text>
+                <Text style={styles.title}>Forgot Password </Text>
                 
-                <UserInput name="UserName"/>
-                <UserInput name="Password"/>        
+                <UserInput name="Phone Number"/>        
                 
                 <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonText}>Login</Text>
+                    <Text style={styles.buttonText}>Send to SMS</Text>
                 </TouchableOpacity>
                             
                 <Text>
                     Don't have an account? <Text onPress={() => navigation.navigate("SignUp")} style={{color:'blue'}}>Sign Up</Text>
                 </Text>
-                <Text onPress={() => navigation.navigate("ForgotPassword")} style={{color: 'red'}}>Forgot Password</Text>
             </View>
         </KeyboardAwareScrollView>
     );
 };
 
 const styles = StyleSheet.create({
-    LogIn: {
+    ForgotPassword: {
         // flex: 1,  
         justifyContent: 'center',
         alignItems: 'center',
@@ -77,4 +75,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default LogIn;
+export default ForgotPassword;
