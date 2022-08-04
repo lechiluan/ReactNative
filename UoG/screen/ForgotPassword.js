@@ -1,22 +1,51 @@
 import { enableExpoCliLogging } from 'expo/build/logs/Logs';
-import react from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, ScrollView} from 'react-native';
 import UserInput from "../Components/UserInput";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view' //ScrollView
 
 const ForgotPassword = ({navigation}) => {
+    const [email, setEmail] = useState('');
+    const [loading, setLoading] = useState('');
+    
+    const handleSubmit = async () => {
+        setLoading(true);
+        const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if(!email) {
+            alert('Please fill out all fields');
+            setLoading(false);
+            return;
+        }
+        else if(reg.test(email) === false) {
+            alert('Please enter a valid email');
+            setLoading(false);
+            return;
+        }
+        // else to send data to the server
+        try {
+            alert('Sending is successful');
+        }
+        catch (error) {
+            alert('Email is incorrect');
+        }
+    };
     return(
         <KeyboardAwareScrollView contentContainerStyle={styles.container}>
             <View style={styles.ForgotPassword}>
                 <Image style={styles.image}source={require('../assets/Logo.png')} />
                 <Text style={styles.title}>Forgot Password </Text>
                 
-                <UserInput name="Phone Number"/>        
+                <UserInput 
+                    name="Email"
+                    value={email}
+                    setValue={setEmail}
+                    autocompleteType="email"
+                />
                 
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonText}>Send to SMS</Text>
+                <TouchableOpacity style={styles.button} onPress={() => handleSubmit()} >
+                    <Text style={styles.buttonText}>{loading ? "Sending..." : "Send code to Email"}</Text>
                 </TouchableOpacity>
-                            
+
                 <Text>
                     Don't have an account? <Text onPress={() => navigation.navigate("SignUp")} style={{color:'blue'}}>Sign Up</Text>
                 </Text>

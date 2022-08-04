@@ -3,12 +3,25 @@ import react from 'react';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity} from 'react-native';
 
 
-const UserInput = ({name}) => {
+const UserInput = ({
+    name,
+    value,
+    setValue,
+    autocompleteType = "none",
+    secureTextEntry = false,
+    keyboardType = "default",
+}) => {
     return (
         <View>
             <Text style={styles.labels}>{name}</Text>
-            <TextInput style={styles.input} />
-            
+            <TextInput 
+                style={styles.input}
+                autocompleteType={autocompleteType}
+                secureTextEntry={secureTextEntry}
+                keyboardType={keyboardType}
+                value={value}
+                onChangeText={(text) => setValue(text)}   
+            />
         </View>
     );
 };

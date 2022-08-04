@@ -1,21 +1,61 @@
 import { enableExpoCliLogging } from 'expo/build/logs/Logs';
-import react from 'react';
+import React, {useState} from 'react';
 import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, ScrollView} from 'react-native';
 import UserInput from "../Components/UserInput";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view' //ScrollView
 
 const LogIn = ({navigation}) => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState('');
+
+    const handleSubmit = async () => {
+        setLoading(true);
+        const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        if(!email || !password) {
+            alert('Please fill out all fields');
+            setLoading(false);
+            return;
+        }
+        else if(reg.test(email) === false) {
+            alert('Please enter a valid email');
+            setLoading(false);
+            return;
+        }
+        else if(password.length < 6) { 
+            alert('Password must be at least 6 characters');
+            setLoading(false);
+            return; 
+        }
+        // else to send data to the server
+        try {
+            alert('Log In is successful');
+        }
+        catch (error) {
+            alert('Username or password is incorrect');
+        }
+    };
     return(
         <KeyboardAwareScrollView contentContainerStyle={styles.container}>
             <View style={styles.LogIn}>
                 <Image style={styles.image}source={require('../assets/Logo.png')} />
                 <Text style={styles.title}>Log In</Text>
                 
-                <UserInput name="UserName"/>
-                <UserInput name="Password"/>        
-                
-                <TouchableOpacity style={styles.button}>
-                    <Text style={styles.buttonText}>Login</Text>
+                <UserInput 
+                    name="Email"
+                    value={email}
+                    setValue={setEmail}
+                    autocompleteType="email"
+                />
+                <UserInput 
+                    name="Password"
+                    value={password}
+                    setValue={setPassword}
+                    secureTextEntry={true}
+                    autocompleteType="password"
+                /> 
+                <TouchableOpacity style={styles.button} onPress={() => handleSubmit()} >
+                    <Text style={styles.buttonText}>{loading ? "Waiting..." : "Log In"}</Text>
                 </TouchableOpacity>
                             
                 <Text>
