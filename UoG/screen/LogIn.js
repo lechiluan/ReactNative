@@ -8,6 +8,9 @@ const LogIn = ({navigation}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState('');
+    const [hidePass, setHidePass] = useState(true);
+    const showPassword = () => {
+        setHidePass(hidePass ? false : true);}
 
     const handleSubmit = async () => {
         setLoading(true);
@@ -48,12 +51,17 @@ const LogIn = ({navigation}) => {
                     autocompleteType="email"
                 />
                 <UserInput 
-                    name="Password"
-                    value={password}
+                    name="Password" 
+                    secureTextEntry={hidePass?true:false} 
+                    value={password}  
                     setValue={setPassword}
-                    secureTextEntry={true}
                     autocompleteType="password"
-                /> 
+                />
+                <View style={styles.logoInput}>
+                    <TouchableOpacity onPress={() => showPassword()}>
+                    <Text>{hidePass? "👀":"⛔"}</Text>
+                    </TouchableOpacity>
+                </View>
                 <TouchableOpacity style={styles.button} onPress={() => handleSubmit()} >
                     <Text style={styles.buttonText}>{loading ? "Waiting..." : "Log In"}</Text>
                 </TouchableOpacity>
@@ -115,6 +123,11 @@ const styles = StyleSheet.create({
     buttonText: {
         color: 'white',
     },
+    logoInput: {
+        position: "relative",
+        top: -45,
+        right: -130,
+    }
 });
 
 export default LogIn;

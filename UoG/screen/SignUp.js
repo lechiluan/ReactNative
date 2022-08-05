@@ -13,6 +13,14 @@ const SignUp = ({ navigation }) => {
     const [phone, setPhone] = useState('');
     const [loading, setLoading] = useState('');
 
+    const [hidePass, setHidePass] = useState(true);
+    const showPassword = () => {
+        setHidePass(hidePass ? false : true);}
+    const [hideConPass, setHideConPass] = useState(true);
+    const showConPassword = () => {
+        setHideConPass(hideConPass ? false : true);}
+    
+
     const handleSubmit = async () => {
         setLoading(true);
         const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -69,20 +77,30 @@ const SignUp = ({ navigation }) => {
                     setValue={setEmail}
                     autocompleteType="email"
                 />
-                <UserInput
-                    name="Password"
-                    value={password}
+                <UserInput 
+                    name="Password" 
+                    secureTextEntry={hidePass?true:false} 
+                    value={password}  
                     setValue={setPassword}
-                    secureTextEntry={true}
                     autocompleteType="password"
                 />
+                <View style={styles.logoInput}>
+                    <TouchableOpacity onPress={() => showPassword()}>
+                    <Text>{hidePass? "👀":"⛔"}</Text>
+                    </TouchableOpacity>
+                </View>
                 <UserInput
                     name="Confirm Password"
                     value={confirmPassword}
-                    secureTextEntry={true}
+                    secureTextEntry={hideConPass?true:false}
                     setValue={setConfirmPassword}
                     autocompleteType="password"
                 />
+                <View style={styles.logoInput}>
+                    <TouchableOpacity onPress={() => showConPassword()}>
+                    <Text>{hideConPass? "👀":"⛔"}</Text>
+                    </TouchableOpacity>
+                </View>
                 <UserInput
                     name="Phone Number"
                     value={phone}
@@ -136,6 +154,11 @@ const styles = StyleSheet.create({
     },
     login: {
         marginBottom: 20,
+    },
+    logoInput: {
+        position: "relative",
+        top: -45,
+        right: -130,
     }
 });
 
