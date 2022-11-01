@@ -16,9 +16,9 @@ const SignUp = ({ navigation }) => {
     const [hidePass, setHidePass] = useState(true);
     const showPassword = () => {
         setHidePass(hidePass ? false : true);}
-    const [hideConPass, setHideConPass] = useState(true);
-    const showConPassword = () => {
-        setHideConPass(hideConPass ? false : true);}
+    const [hideConfirmPass, setHideConfirmPass] = useState(true);
+    const showConfirmPassword = () => {
+        setHideConfirmPass(hideConfirmPass ? false : true);}
     
 
     const handleSubmit = async () => {
@@ -92,13 +92,13 @@ const SignUp = ({ navigation }) => {
                 <UserInput
                     name="Confirm Password"
                     value={confirmPassword}
-                    secureTextEntry={hideConPass?true:false}
+                    secureTextEntry={hideConfirmPass?true:false}
                     setValue={setConfirmPassword}
                     autocompleteType="password"
                 />
                 <View style={styles.logoInput}>
-                    <TouchableOpacity onPress={() => showConPassword()}>
-                    <Text>{hideConPass? "👀":"⛔"}</Text>
+                    <TouchableOpacity onPress={() => showConfirmPassword()}>
+                    <Text>{hideConfirmPass? "👀":"⛔"}</Text>
                     </TouchableOpacity>
                 </View>
                 <UserInput
